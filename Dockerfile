@@ -8,8 +8,11 @@ RUN /home/sage/sage/local/bin/python3 -m pip install --no-cache jupyterhub==$JUP
 # Fix 500 Internal Server Error caused by the higher version of tornado
 RUN /home/sage/sage/local/bin/python3 -m pip install --no-cache -U nbconvert
 
-ENV HOME=/home/sage
-WORKDIR $HOME
+
 USER sage
+ENV HOME=/home/sage
+RUN mkdir /home/sage/notebooks
+WORKDIR $HOME/notebooks
+
 
 CMD ["/home/sage/sage/local/bin/jupyterhub-singleuser"]
